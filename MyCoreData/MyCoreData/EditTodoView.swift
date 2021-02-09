@@ -6,43 +6,49 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct EditTodoView: View {
-  @State var todo: ToDo
-  @State var todoTitle: String = ""
-  @Environment(\.presentationMode) var presentationMode
 
   var titleBinding: Binding<String> {
        Binding<String>(
-           get: { todoTitle },
-           set: { todoTitle = $0 })
+        get: { item.title ?? "" },
+        set: { item.title = $0 })
+  }
+
+  @Environment(\.presentationMode) var presentationMode
+  let parentContext: NSManagedObjectContext
+  let item: ToDo
+  let context: NSManagedObjectContext
+
+  init(todo: ToDo) {
+    parentContext = todo.managedObjectContext!
+    let childContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    childContext.parent = parentContext
+    item = try! childContext.existingObject(with: todo.objectID) as! ToDo
+    context = childContext
   }
 
     var body: some View {
       Form {
         TextField("Title", text: titleBinding)
         Button("Save") {
-          StoreManager.shared.persistentContainer.performBackgroundTask { context in
-            do {
-             let item = try? context.existingObject(with: todo.objectID) as? ToDo
-              item?.title = todoTitle
-            } catch {
-
-            }
-            do {
-              try context.save()
-              DispatchQueue.main.async {
-                presentationMode.wrappedValue.dismiss()
-              }
-            } catch {
-              print(error)
-            }
+          defer {
+            presentationMode.wrappedValue.dismiss()
+          }
+          guard context.hasChanges else {
+            return
+          }
+          do {
+            try context.save()
+            try parentContext.save()
+          } catch {
+            print("err")
+            return
           }
         }
       }
-      .onAppear {
-        todoTitle = todo.title ?? ""
-      }.navigationTitle("Edit ToDo")
+      .navigationTitle("Edit ToDo")
     }
 }
 
