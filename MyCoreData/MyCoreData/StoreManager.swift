@@ -20,7 +20,7 @@ final class StoreManager {
         print(error.localizedDescription)
       }
     }
-    self.persistentContainer.viewContext.automaticallyMergesChangesFromParent = false
+    self.persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
 
   }
 

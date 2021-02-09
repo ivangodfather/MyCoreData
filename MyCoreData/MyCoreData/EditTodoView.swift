@@ -22,11 +22,15 @@ struct EditTodoView: View {
       Form {
         TextField("Title", text: titleBinding)
         Button("Save") {
-          let bgContext = StoreManager.shared.persistentContainer.newBackgroundContext()
-          bgContext.perform {
-            todo.title = todoTitle
+          StoreManager.shared.persistentContainer.performBackgroundTask { context in
             do {
-              try bgContext.save()
+             let item = try? context.existingObject(with: todo.objectID) as? ToDo
+              item?.title = todoTitle
+            } catch {
+
+            }
+            do {
+              try context.save()
               DispatchQueue.main.async {
                 presentationMode.wrappedValue.dismiss()
               }
