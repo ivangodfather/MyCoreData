@@ -11,22 +11,24 @@ import CoreData
 final class StoreManager {
 
   static let shared = StoreManager()
-  let container: NSPersistentContainer
+  let persistentContainer: NSPersistentContainer
 
   init() {
-    container = NSPersistentContainer(name: "MyCoreData")
-    container.loadPersistentStores { desc, error in
+    persistentContainer = NSPersistentContainer(name: "MyCoreData")
+    persistentContainer.loadPersistentStores { desc, error in
       if let error = error {
         print(error.localizedDescription)
       }
     }
+    self.persistentContainer.viewContext.automaticallyMergesChangesFromParent = false
+
   }
 
   func saveToDo(title: String) {
-    let todo = ToDo(context: container.viewContext)
+    let todo = ToDo(context: persistentContainer.viewContext)
     todo.title = title
     do {
-      try container.viewContext.save()
+      try persistentContainer.viewContext.save()
     } catch {
       print("Failed to save \(error)")
     }
@@ -35,7 +37,7 @@ final class StoreManager {
   func getToDos() -> [ToDo] {
     let fetchRequest: NSFetchRequest<ToDo> = ToDo.fetchRequest()
     do {
-      return try container.viewContext.fetch(fetchRequest)
+      return try persistentContainer.viewContext.fetch(fetchRequest)
     } catch {
       print(error.localizedDescription)
     }
@@ -43,9 +45,9 @@ final class StoreManager {
   }
 
   func deleteTodo(todo: ToDo) {
-    container.viewContext.delete(todo)
+    persistentContainer.viewContext.delete(todo)
     do {
-      try container.viewContext.save()
+      try persistentContainer.viewContext.save()
     } catch {
       print(error.localizedDescription)
     }
@@ -61,9 +63,9 @@ final class StoreManager {
 
   func updateToDo() {
     do {
-      try container.viewContext.save()
+      try persistentContainer.viewContext.save()
     } catch {
-      container.viewContext.rollback()
+      persistentContainer.viewContext.rollback()
     }
   }
 }
