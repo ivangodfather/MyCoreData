@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		426A367E25C016A500A2A0B1 /* MyCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 426A367C25C016A500A2A0B1 /* MyCoreData.xcdatamodeld */; };
 		427421D425C1947F00AC162D /* EditTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427421D325C1947F00AC162D /* EditTodoView.swift */; };
 		427D384925D2DD940087C87D /* TodoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427D384825D2DD940087C87D /* TodoListViewModel.swift */; };
+		427D384F25D3D36B0087C87D /* ToastUI in Frameworks */ = {isa = PBXBuildFile; productRef = 427D384E25D3D36B0087C87D /* ToastUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				427D384F25D3D36B0087C87D /* ToastUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +99,9 @@
 			dependencies = (
 			);
 			name = MyCoreData;
+			packageProductDependencies = (
+				427D384E25D3D36B0087C87D /* ToastUI */,
+			);
 			productName = MyCoreData;
 			productReference = 426A366625C00E1B00A2A0B1 /* MyCoreData.app */;
 			productType = "com.apple.product-type.application";
@@ -124,6 +129,9 @@
 				Base,
 			);
 			mainGroup = 426A365D25C00E1B00A2A0B1;
+			packageReferences = (
+				427D384D25D3D36B0087C87D /* XCRemoteSwiftPackageReference "ToastUI" */,
+			);
 			productRefGroup = 426A366725C00E1B00A2A0B1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -344,6 +352,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		427D384D25D3D36B0087C87D /* XCRemoteSwiftPackageReference "ToastUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/quanshousio/ToastUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		427D384E25D3D36B0087C87D /* ToastUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 427D384D25D3D36B0087C87D /* XCRemoteSwiftPackageReference "ToastUI" */;
+			productName = ToastUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		426A367C25C016A500A2A0B1 /* MyCoreData.xcdatamodeld */ = {

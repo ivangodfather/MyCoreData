@@ -36,5 +36,10 @@ final class TodoListViewModel: ObservableObject {
 
     @objc private func contextDidSave(_ notification: Notification) {
         refresh()
+        let deletedKey = NSManagedObjectContext.NotificationKey.deletedObjects.rawValue
+        let deletedObjects = notification.userInfo?[deletedKey] as? Set<ToDo>
+        deletedObjects?.forEach {
+            print($0.title ?? "")
+        }
     }
 }
