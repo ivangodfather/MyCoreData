@@ -30,8 +30,10 @@ struct EditTodoView: View {
   }
 
     var body: some View {
-      Form {
-        TextField("Title", text: titleBinding)
+      List {
+        Section(header: Text("Description")) {
+          TextField("Title", text: titleBinding)
+        }
         Button("Save") {
           defer {
             presentationMode.wrappedValue.dismiss()
@@ -47,8 +49,13 @@ struct EditTodoView: View {
             return
           }
         }
-      }
+      }.listStyle(GroupedListStyle())
       .navigationTitle("Edit ToDo")
+      .onDisappear(perform: {
+        if context.hasChanges {
+          context.refresh(item, mergeChanges: false)
+        }
+      })
     }
 }
 
