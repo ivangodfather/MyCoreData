@@ -16,7 +16,7 @@ final class TodoListViewModel: ObservableObject {
     init() {
         refresh()
         let notificationName = NSManagedObjectContext.didSaveObjectsNotification
-        NotificationCenter.default.addObserver(self, selector: #selector(contextDidSave(_:)), name: notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(contextDidSave(_:)), name: notificationName, object: StoreManager.shared.persistentContainer.viewContext)
     }
 
     func refresh() {
@@ -31,15 +31,20 @@ final class TodoListViewModel: ObservableObject {
         let tasks = ["dog", "cat", "friend", "house", "street"]
         let verbs = ["clean", "pet", "play", "buy", "run"]
         let title = verbs.randomElement()! + " " + tasks.randomElement()!
-        StoreManager.shared.saveToDo(title: title)
+        guard let category = StoreManager.shared.getCategories().randomElement() else {
+            return
+        }
+        StoreManager.shared.saveToDo(title: title, category: category)
     }
 
     @objc private func contextDidSave(_ notification: Notification) {
         refresh()
-        let deletedKey = NSManagedObjectContext.NotificationKey.deletedObjects.rawValue
-        let deletedObjects = notification.userInfo?[deletedKey] as? Set<ToDo>
-        deletedObjects?.forEach {
-            print($0.title ?? "")
+        let keys: [NSManagedObjectContext.NotificationKey] = [.deletedObjects, .insertedObjects,  .updatedObjects]
+        keys.forEach { key in
+            let objects = notification.userInfo?[key.rawValue] as? Set<ToDo>
+            objects?.forEach {
+                print(key.rawValue + " " + ($0.title ?? ""))
+            }
         }
     }
 }

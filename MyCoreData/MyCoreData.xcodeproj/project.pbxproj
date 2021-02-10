@@ -16,6 +16,10 @@
 		427421D425C1947F00AC162D /* EditTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427421D325C1947F00AC162D /* EditTodoView.swift */; };
 		427D384925D2DD940087C87D /* TodoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427D384825D2DD940087C87D /* TodoListViewModel.swift */; };
 		427D384F25D3D36B0087C87D /* ToastUI in Frameworks */ = {isa = PBXBuildFile; productRef = 427D384E25D3D36B0087C87D /* ToastUI */; };
+		427D385525D4143A0087C87D /* AddTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427D385425D4143A0087C87D /* AddTodoView.swift */; };
+		427D385825D4150E0087C87D /* AddTodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427D385725D4150E0087C87D /* AddTodoViewModel.swift */; };
+		427D385D25D42B670087C87D /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427D385C25D42B670087C87D /* AddCategoryView.swift */; };
+		427D386025D42BE50087C87D /* AddCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427D385F25D42BE50087C87D /* AddCategoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +33,10 @@
 		426A367D25C016A500A2A0B1 /* MyCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyCoreData.xcdatamodel; sourceTree = "<group>"; };
 		427421D325C1947F00AC162D /* EditTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoView.swift; sourceTree = "<group>"; };
 		427D384825D2DD940087C87D /* TodoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModel.swift; sourceTree = "<group>"; };
+		427D385425D4143A0087C87D /* AddTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoView.swift; sourceTree = "<group>"; };
+		427D385725D4150E0087C87D /* AddTodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewModel.swift; sourceTree = "<group>"; };
+		427D385C25D42B670087C87D /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
+		427D385F25D42BE50087C87D /* AddCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,10 +71,11 @@
 			isa = PBXGroup;
 			children = (
 				426A366925C00E1B00A2A0B1 /* MyCoreDataApp.swift */,
-				426A366B25C00E1B00A2A0B1 /* TodoListView.swift */,
-				427D384825D2DD940087C87D /* TodoListViewModel.swift */,
-				427421D325C1947F00AC162D /* EditTodoView.swift */,
 				426A367925C00EFD00A2A0B1 /* StoreManager.swift */,
+				427D385125D410850087C87D /* TodoList */,
+				427421D325C1947F00AC162D /* EditTodoView.swift */,
+				427D386225D42BE90087C87D /* AddCategory */,
+				427D385A25D415140087C87D /* AddTodo */,
 				426A367C25C016A500A2A0B1 /* MyCoreData.xcdatamodeld */,
 				426A366D25C00E1B00A2A0B1 /* Assets.xcassets */,
 				426A367225C00E1B00A2A0B1 /* Info.plist */,
@@ -81,6 +90,33 @@
 				426A367025C00E1B00A2A0B1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		427D385125D410850087C87D /* TodoList */ = {
+			isa = PBXGroup;
+			children = (
+				426A366B25C00E1B00A2A0B1 /* TodoListView.swift */,
+				427D384825D2DD940087C87D /* TodoListViewModel.swift */,
+			);
+			path = TodoList;
+			sourceTree = "<group>";
+		};
+		427D385A25D415140087C87D /* AddTodo */ = {
+			isa = PBXGroup;
+			children = (
+				427D385425D4143A0087C87D /* AddTodoView.swift */,
+				427D385725D4150E0087C87D /* AddTodoViewModel.swift */,
+			);
+			path = AddTodo;
+			sourceTree = "<group>";
+		};
+		427D386225D42BE90087C87D /* AddCategory */ = {
+			isa = PBXGroup;
+			children = (
+				427D385C25D42B670087C87D /* AddCategoryView.swift */,
+				427D385F25D42BE50087C87D /* AddCategoryViewModel.swift */,
+			);
+			path = AddCategory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,9 +196,13 @@
 			files = (
 				426A367E25C016A500A2A0B1 /* MyCoreData.xcdatamodeld in Sources */,
 				426A367A25C00EFD00A2A0B1 /* StoreManager.swift in Sources */,
+				427D385525D4143A0087C87D /* AddTodoView.swift in Sources */,
+				427D385D25D42B670087C87D /* AddCategoryView.swift in Sources */,
 				426A366C25C00E1B00A2A0B1 /* TodoListView.swift in Sources */,
+				427D385825D4150E0087C87D /* AddTodoViewModel.swift in Sources */,
 				426A366A25C00E1B00A2A0B1 /* MyCoreDataApp.swift in Sources */,
 				427D384925D2DD940087C87D /* TodoListViewModel.swift in Sources */,
+				427D386025D42BE50087C87D /* AddCategoryViewModel.swift in Sources */,
 				427421D425C1947F00AC162D /* EditTodoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

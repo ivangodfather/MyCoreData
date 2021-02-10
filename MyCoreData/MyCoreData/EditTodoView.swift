@@ -44,13 +44,14 @@ struct EditTodoView: View {
           do {
             try context.save()
             try parentContext.save()
-          } catch {
-            print("err")
-            return
-          }
+          } catch { return }
         }
       }.listStyle(GroupedListStyle())
-      .navigationTitle("Edit ToDo")
+      .toolbar {
+        ToolbarItem(placement: .principal) {
+            Text("Edit To Do")
+        }
+      }
       .onDisappear(perform: {
         if context.hasChanges {
           context.refresh(item, mergeChanges: false)
