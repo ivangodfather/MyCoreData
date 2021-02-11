@@ -20,7 +20,7 @@ final class StoreManager {
                 print(error.localizedDescription)
             }
         }
-        self.persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
+        self.persistentContainer.viewContext.automaticallyMergesChangesFromParent = false
     }
 
     func saveToDo(title: String, category: Category) {
@@ -94,6 +94,17 @@ final class StoreManager {
         } catch {
             print("Failed to save \(error)")
         }
+    }
+
+    func setQueryGeneration() {
+        let currentToken = persistentContainer.viewContext.queryGenerationToken
+        print(currentToken?.description)
+        try! persistentContainer.viewContext.setQueryGenerationFrom(currentToken)
+    }
+
+    func setLastQueryGeneration() {
+        let currentToken = NSQueryGenerationToken.current
+        try! persistentContainer.viewContext.setQueryGenerationFrom(currentToken)
     }
 
 

@@ -31,6 +31,14 @@ struct AddTodoView: View {
             Section(header: Text("Details")) {
                 TextField("Enter description", text: $description)
             }
+            Section(header: Text("Other")) {
+                Button(action: {
+                    StoreManager.shared.setLastQueryGeneration()
+                    viewModel.refresh()
+                }) {
+                    Text("Refresh store")
+                }
+            }
         }
         .sheet(isPresented: $showAddCategory, onDismiss: {}) {
             AddCategoryView(didAddCategoryCompletion: { category in
@@ -42,9 +50,7 @@ struct AddTodoView: View {
         .listStyle(GroupedListStyle())
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Button(action: { viewModel.save(categoryIndex: selectedCategory, description: description) }) {
-                    Text("Add to do")
-                }
+                Text("Add to do")
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {

@@ -23,31 +23,28 @@ struct TodoListView: View {
                     }
                 }.onDelete(perform: viewModel.delete)
             }
-            .toolbar { MyToolBarContent(viewModel: viewModel) }
+            .toolbar(content: myToolBarContent)
         }
         .onAppear(perform: viewModel.refresh)
 
     }
 
-    struct MyToolBarContent: ToolbarContent {
-        let viewModel: TodoListViewModel
-
-        var body: some ToolbarContent {
-            ToolbarItem(placement: .principal) {
-                Text("To do list")
+    @ToolbarContentBuilder
+    func myToolBarContent() -> some ToolbarContent {
+        ToolbarItem(placement: .principal) {
+            Text("To do list")
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button(action: viewModel.refresh) {
+                Image(systemName: "clock.arrow.2.circlepath")
             }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: viewModel.refresh) {
-                    Image(systemName: "clock.arrow.2.circlepath")
-                }
-            }
-            ToolbarItemGroup(placement: .navigationBarLeading) {
-                Button(action: viewModel.addRandom) {
-                    Image(systemName: "folder.badge.questionmark")
-                }
-                NavigationLink(destination: AddTodoView()) {
-                    Image(systemName: "plus.rectangle.on.rectangle")
-                }
+        }
+        ToolbarItemGroup(placement: .navigationBarLeading) {
+//            Button(action: viewModel.addRandom) {
+//                Image(systemName: "folder.badge.questionmark")
+//            }
+            NavigationLink(destination: AddTodoView()) {
+                Image(systemName: "plus.rectangle.on.rectangle")
             }
         }
     }

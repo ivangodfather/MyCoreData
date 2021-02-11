@@ -15,7 +15,10 @@ final class AddCategoryViewModel: ObservableObject {
         categories = StoreManager.shared.getCategories()
     }
 
-    func save(name: String, imageIndex: Int) -> Category {
+    func save(name: String, imageIndex: Int, updatePersistentStore: Bool) -> Category {
+        if !updatePersistentStore {
+            StoreManager.shared.setQueryGeneration()
+        }
         let imageName = images[imageIndex]
         return StoreManager.shared.addCategory(title: name, imageName: imageName)
     }

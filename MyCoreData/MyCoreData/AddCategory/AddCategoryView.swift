@@ -15,7 +15,7 @@ struct AddCategoryView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var categoryTitle = ""
     @State private var selectedImage = 0
-
+    @State private var updatePersistentStore = true
     var body: some View {
         NavigationView {
             List {
@@ -25,6 +25,12 @@ struct AddCategoryView: View {
                         ForEach(Array(viewModel.images.enumerated()), id: \.offset) { offset, image in
                             Image(systemName: image)
                         }
+                    }
+                    HStack {
+                        Button(action: { updatePersistentStore.toggle() }) {
+                            Image(systemName: updatePersistentStore ? "checkmark" : "xmark")
+                        }
+                        Text("Update persistent store")
                     }
                 }
                 Section(header: Text("Existing categories")) {
@@ -46,7 +52,7 @@ struct AddCategoryView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
-                        let category = viewModel.save(name: categoryTitle, imageIndex: selectedImage)
+                        let category = viewModel.save(name: categoryTitle, imageIndex: selectedImage, updatePersistentStore: updatePersistentStore)
                         didAddCategoryCompletion(category)
                     }
                 }
